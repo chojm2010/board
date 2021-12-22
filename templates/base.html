@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 실습</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+</head>
+<body>
+{% include "navbar.html" %}
+<!-- 기본 템플릿 안에 삽입될 내용 start-->
+{% block content %}
+<!-- 이 사이로 list, detail등 상속받은 html코드들이 삽입.-->
+{% endblock %}
+{% block script %}
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 end-->
+</body>
+</html>

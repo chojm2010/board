@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% if test_list %}
+    {% for test in test_list %}
+        <p>{{ test.title }}</p>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
