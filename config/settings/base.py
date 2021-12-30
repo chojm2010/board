@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import json
+import os
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY =
-with open("\secret.json") as f:
+curPath = os.getcwd()
+with open(curPath+"secret.json") as f:
     secrets = json.loads(f.read())
 
 
