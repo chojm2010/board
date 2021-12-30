@@ -13,7 +13,7 @@
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="row my-3">
         <div class="col-1">
-            <div class="bg-light text-center p-3 border font-weight-bolder mb-1">
+            <div class="bg-light text-center p-3 border font-weight-bolder mb-1" id="test">
                 {{question.voter.count}}
             </div>
             <a href="#" data-uri="{% url 'board:vote_question' question.id %}"
@@ -76,7 +76,7 @@
         <div class="row my-3">
             <div class="col-1">
                 <div class="bg-light text-center p-3 border font-weight-bolder mb-1">
-                    {{question.voter.count}}
+                    {{answer.voter.count}}
                 </div>
                 <a href="#" data-uri="{% url 'board:vote_answer' question.id %}"
                    class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
@@ -160,6 +160,8 @@
 {% endblock %}
 <!-- javascript 영역-->
 {% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
     $(".delete").on('click', function(){
@@ -168,8 +170,20 @@ $(document).ready(function(){
         }
     });
     $(".recommend").on('click', function(){
-        if(confirm("정말로 삭제?")){
-            location.href = $(this).data('uri');
+
+        //console.dir($(".recommend").val($(this).val()));
+        if(confirm("추천?")){
+            $.ajax({
+                url:$(this).data('uri'),
+                data : {'question_id':{{question.id}}},
+                dataType:"json",
+                success:function(response){
+                    $('#test').html(response.voter_cnt)
+                }
+
+            })
+
+           // location.href = $(this).data('uri');
         }
     });
 });

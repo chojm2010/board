@@ -4,6 +4,9 @@ from django.utils import timezone
 from ..forms import QuestionForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
+import json
+
 
 @login_required(login_url='common:login')
 def question_modify(request, question_id):
@@ -59,10 +62,18 @@ def question_delete(request, question_id):
 @login_required(login_url='common:login')
 def vote_question(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    if request.user == question.author:
-        messages.error(request, '본인이 작성한 글을 추천할수 없습니다.')
-    else:
+    if request.is_ajax():
+        q_id = request.GET['question_id']
+        question.voter.add(request.user)
+        #post = Question.objects.get(id=q_id)
+        if request.user == question.author:
+            messages.error(request, '본인이 작성한 글을 추천할수 없습니다.')
+            return False
+
         # Question 모델의 voter는 여러사람을 추가할수 있는 ManyToMany 이므로
         # add함수를 통한 처리가 필요하다.
-        question.voter.add(request.user)
-    return redirect('board:detail', question_id=question.id)
+
+    context = {'voter_cnt': question.voter.count()}
+    return HttpResponse(json.dumps(context), content_type='application/json')
+    #return redirect('board:detail', question_id=question.id)
+    #return render(request, 'board/question_detail.html', question.id)
