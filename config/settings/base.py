@@ -39,7 +39,7 @@ SECRET_KEY = "zaihgmcw^%qm+tw%tr4xczv5@0c)nvzt8!=_cj18pb=dxvlog@"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['15.164.66.61']
 
 
 # Application definition
