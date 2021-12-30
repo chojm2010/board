@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY =
-with open("secret.json") as f:
+with open("\secret.json") as f:
     secrets = json.loads(f.read())
 
 
