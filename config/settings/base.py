@@ -37,9 +37,9 @@ SECRET_KEY = "zaihgmcw^%qm+tw%tr4xczv5@0c)nvzt8!=_cj18pb=dxvlog@"
 #
 # SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['15.164.66.61']
+ALLOWED_HOSTS = ['15.164.66.61', 'jmchoshop.shop']
 
 
 # Application definition
